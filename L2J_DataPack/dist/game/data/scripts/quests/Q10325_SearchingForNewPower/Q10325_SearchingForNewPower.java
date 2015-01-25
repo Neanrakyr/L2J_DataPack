@@ -82,36 +82,42 @@ public class Q10325_SearchingForNewPower extends Quest
 						qs.startQuest();
 						htmltext = "32980-human.htm";
 						qs.setCond(2, true);
+						break;
 					}
 					case ELF:
 					{
 						qs.startQuest();
 						htmltext = "32980-elves.htm";
 						qs.setCond(3, true);
+						break;
 					}
 					case DARK_ELF:
 					{
 						qs.startQuest();
 						htmltext = "32980-darkelves.htm";
 						qs.setCond(4, true);
+						break;
 					}
 					case ORC:
 					{
 						qs.startQuest();
 						htmltext = "32980-orcs.htm";
 						qs.setCond(5, true);
+						break;
 					}
 					case DWARF:
 					{
 						qs.startQuest();
 						htmltext = "32980-dwarves.htm";
 						qs.setCond(6, true);
+						break;
 					}
 					case KAMAEL:
 					{
 						qs.startQuest();
 						htmltext = "32980-kamael.htm";
 						qs.setCond(7, true);
+						break;
 					}
 				}
 				break;
@@ -140,6 +146,7 @@ public class Q10325_SearchingForNewPower extends Quest
 		switch (npc.getId())
 		{
 			case GALLINT:
+			{
 				if (qs.isCreated())
 				{
 					htmltext = "32980-01.htm";
@@ -164,9 +171,11 @@ public class Q10325_SearchingForNewPower extends Quest
 					htmltext = "32980-04.htm";
 					qs.exitQuest(false, true);
 				}
-				break;	
+				break;
+			}
 		
 			case TALBOT:
+			{
 				if (player.getRace() == Race.HUMAN)
 				{
 					if (qs.isCond(2))
@@ -184,8 +193,10 @@ public class Q10325_SearchingForNewPower extends Quest
 					htmltext = "32156-03.htm";
 				}
 				break;
+			}
 			
 			case CIDNET:
+			{
 				if (player.getRace() == Race.ELF)
 				{
 					if (qs.isCond(3))
@@ -203,8 +214,10 @@ public class Q10325_SearchingForNewPower extends Quest
 					htmltext = "32156-03.htm";
 				}
 				break;
+			}
 
 			case BLACK:
+			{
 				if (player.getRace() == Race.DARK_ELF)
 				{
 					if (qs.isCond(4))
@@ -222,8 +235,10 @@ public class Q10325_SearchingForNewPower extends Quest
 					htmltext = "32156-03.htm";
 				}
 				break;
+			}
 
 			case HERTZ:
+			{
 				if (player.getRace() == Race.ORC)
 				{
 					if (qs.isCond(5))
@@ -241,8 +256,10 @@ public class Q10325_SearchingForNewPower extends Quest
 					htmltext = "32161-03.htm";
 				}
 				break;
+			}
 				
 			case KINCAID:
+			{
 				if (player.getRace() == Race.DWARF)
 				{
 					if (qs.isCond(6))
@@ -260,8 +277,10 @@ public class Q10325_SearchingForNewPower extends Quest
 					htmltext = "32159-03.htm";
 				}
 				break;
+			}
 				
 			case XONIA:
+			{
 				if (player.getRace() == Race.KAMAEL)
 				{
 					if (qs.isCond(7))
@@ -279,6 +298,7 @@ public class Q10325_SearchingForNewPower extends Quest
 					htmltext = "32144-03.htm";
 				}
 				break;
+			}
 		}
 		return htmltext;
 	}
