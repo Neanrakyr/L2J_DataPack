@@ -39,7 +39,7 @@ public class Q10325_SearchingForNewPower extends Quest
 	private static final int TALBOT = 32156; // 2 - Human
 	private static final int CIDNET = 32148; // 3 - Elven
 	private static final int BLACK = 32161; // 4 - Dark Elven
-	private static final int HERTZ = 32151;// 5 - Orc
+	private static final int HERTZ = 32151; // 5 - Orc
 	private static final int KINCAID = 32159; // 6 - Dwarf
 	private static final int XONIA = 32144; // 7 - Kamael
 	
@@ -58,6 +58,7 @@ public class Q10325_SearchingForNewPower extends Quest
 		addTalkId(GALLINT, TALBOT, CIDNET, BLACK, HERTZ, KINCAID, XONIA);
 		addCondLevel(MIN_LEVEL, MAX_LEVEL, "32980-noLevel");
 		addCondNotRace(Race.ERTHEIA, "32980-noErtheia.htm");
+		addCondCompletedQuest(Q10324_FindingMagisterGallint.class.getSimpleName(), "32980-noQuestComplete.htm");
 	}
 	
 	@Override
@@ -74,41 +75,44 @@ public class Q10325_SearchingForNewPower extends Quest
 		{
 			case "quest_accept":
 			{
-				if (player.getRace() == Race.HUMAN)
+				switch(player.getRace())
 				{
-					qs.startQuest();
-					htmltext = "32980-human.htm";
-					qs.setCond(2, true);
-				}
-				if (player.getRace() == Race.ELF)
-				{
-					qs.startQuest();
-					htmltext = "32980-elves.htm";
-					qs.setCond(3, true);
-				}
-				if (player.getRace() == Race.DARK_ELF)
-				{
-					qs.startQuest();
-					htmltext = "32980-darkelves.htm";
-					qs.setCond(4, true);
-				}
-				if (player.getRace() == Race.ORC)
-				{
-					qs.startQuest();
-					htmltext = "32980-orcs.htm";
-					qs.setCond(5, true);
-				}
-				if (player.getRace() == Race.DWARF)
-				{
-					qs.startQuest();
-					htmltext = "32980-dwarves.htm";
-					qs.setCond(6, true);
-				}
-				if (player.getRace() == Race.KAMAEL)
-				{
-					qs.startQuest();
-					htmltext = "32980-kamael.htm";
-					qs.setCond(7, true);
+					case HUMAN:
+					{
+						qs.startQuest();
+						htmltext = "32980-human.htm";
+						qs.setCond(2, true);
+					}
+					case ELF:
+					{
+						qs.startQuest();
+						htmltext = "32980-elves.htm";
+						qs.setCond(3, true);
+					}
+					case DARK_ELF:
+					{
+						qs.startQuest();
+						htmltext = "32980-darkelves.htm";
+						qs.setCond(4, true);
+					}
+					case ORC:
+					{
+						qs.startQuest();
+						htmltext = "32980-orcs.htm";
+						qs.setCond(5, true);
+					}
+					case DWARF:
+					{
+						qs.startQuest();
+						htmltext = "32980-dwarves.htm";
+						qs.setCond(6, true);
+					}
+					case KAMAEL:
+					{
+						qs.startQuest();
+						htmltext = "32980-kamael.htm";
+						qs.setCond(7, true);
+					}
 				}
 				break;
 			}
@@ -133,12 +137,6 @@ public class Q10325_SearchingForNewPower extends Quest
 			htmltext = getAlreadyCompletedMsg(player);
 		}
 		
-		final QuestState quest = player.getQuestState(Q10324_FindingMagisterGallint.class.getSimpleName());
-		if (!quest.isCompleted())
-		{
-			return "32980-noQuestComplete.htm";
-		}
-		
 		switch (npc.getId())
 		{
 			case GALLINT:
@@ -150,7 +148,7 @@ public class Q10325_SearchingForNewPower extends Quest
 				{	
 					htmltext = "32980-03.htm";
 				}
-				if (qs.isCond(8))
+				else if (qs.isCond(8))
 				{
 					if (player.isMageClass())
 					{
@@ -169,98 +167,116 @@ public class Q10325_SearchingForNewPower extends Quest
 				break;	
 		
 			case TALBOT:
-				if (qs.isCond(2) && player.getRace() == Race.HUMAN)
+				if (player.getRace() == Race.HUMAN)
 				{
-					htmltext = "32156-01.htm";
-					qs.setCond(8, true);
+					if (qs.isCond(2))
+					{
+						htmltext = "32156-01.htm";
+						qs.setCond(8, true);
+					}
+					else if (qs.isCond(8))
+					{
+						htmltext = "32156-02.htm";
+					}
 				}
 				else
 				{
 					htmltext = "32156-03.htm";
-				}
-				if (qs.isCond(8) && player.getRace() == Race.HUMAN)
-				{
-					htmltext = "32156-02.htm";
 				}
 				break;
 			
 			case CIDNET:
-				if (qs.isCond(3) && player.getRace() == Race.ELF)
+				if (player.getRace() == Race.ELF)
 				{
-					htmltext = "32156-01.htm";
-					qs.setCond(8, true);
+					if (qs.isCond(3))
+					{
+						htmltext = "32156-01.htm";
+						qs.setCond(8, true);
+					}
+					else if (qs.isCond(8))
+					{
+						htmltext = "32156-02.htm";
+					}
 				}
 				else
 				{
 					htmltext = "32156-03.htm";
-				}
-				if (qs.isCond(8) && player.getRace() == Race.ELF)
-				{
-					htmltext = "32156-02.htm";
 				}
 				break;
 
 			case BLACK:
-				if (qs.isCond(4) && player.getRace() == Race.DARK_ELF)
+				if (player.getRace() == Race.DARK_ELF)
 				{
-					htmltext = "32156-01.htm";
-					qs.setCond(8, true);
+					if (qs.isCond(4))
+					{
+						htmltext = "32156-01.htm";
+						qs.setCond(8, true);
+					}
+					else if (qs.isCond(8))
+					{
+						htmltext = "32156-02.htm";
+					}
 				}
 				else
 				{
 					htmltext = "32156-03.htm";
 				}
-				if (qs.isCond(8) && player.getRace() == Race.DARK_ELF)
-				{
-					htmltext = "32156-02.htm";
-				}
 				break;
 
 			case HERTZ:
-				if (qs.isCond(5) && player.getRace() == Race.ORC)
+				if (player.getRace() == Race.ORC)
 				{
-					htmltext = "32161-01.htm";
-					qs.setCond(8, true);
+					if (qs.isCond(5))
+					{
+						htmltext = "32161-01.htm";
+						qs.setCond(8, true);
+					}
+					else if (qs.isCond(8))
+					{
+						htmltext = "32161-02.htm";
+					}
 				}
 				else
 				{
 					htmltext = "32161-03.htm";
 				}
-				if (qs.isCond(8) && player.getRace() == Race.ORC)
-				{
-					htmltext = "32161-02.htm";
-				}
 				break;
 				
 			case KINCAID:
-				if (qs.isCond(6) && player.getRace() == Race.DWARF)
+				if (player.getRace() == Race.DWARF)
 				{
-					htmltext = "32159-01.htm";
-					qs.setCond(8, true);
+					if (qs.isCond(6))
+					{
+						htmltext = "32159-01.htm";
+						qs.setCond(8, true);
+					}
+					else if (qs.isCond(8))
+					{
+						htmltext = "32159-02.htm";
+					}
 				}
 				else
 				{
 					htmltext = "32159-03.htm";
 				}
-				if (qs.isCond(8) && player.getRace() == Race.DWARF)
-				{
-					htmltext = "32159-02.htm";
-				}
 				break;
 				
 			case XONIA:
-				if (qs.isCond(7) && player.getRace() == Race.KAMAEL)
+				if (player.getRace() == Race.KAMAEL)
 				{
-					htmltext = "32144-01.htm";
-					qs.setCond(8, true);
+					if (qs.isCond(7))
+					{
+						htmltext = "32144-01.htm";
+						qs.setCond(8, true);
+					}
+					else if (qs.isCond(8))
+					{
+						htmltext = "32144-02.htm";
+					}
 				}
 				else
 				{
 					htmltext = "32144-03.htm";
-				}
-				if (qs.isCond(8) && player.getRace() == Race.KAMAEL)
-				{
-					htmltext = "32144-02.htm";
 				}
 				break;
 		}
